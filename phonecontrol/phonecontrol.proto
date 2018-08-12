@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package phonecontrol;
+
+import "google/api/annotations.proto";
+
+service Service {
+        rpc GetVolumeState (Request) returns (Response){
+                option(google.api.http) = {
+                        get : "/service/getvolumestate.json"
+                };
+        }
+
+        rpc SetSilence (Request) returns (Response){
+                option(google.api.http) = {
+                        get : "/service/setsilence.json"
+                };
+        }
+
+        rpc SetNormal (Request) returns (Response){
+                option(google.api.http) = {
+                        get : "/service/setnormal.json"
+                };
+        }
+
+        rpc Vibrate(VibrateRequest) returns (Response){
+                option(google.api.http) = {
+                        get : "/service/vibrate.json"
+                };
+        }
+}
+
+message Request {
+}
+
+message Response {
+        int32 result = 1;
+}
+
+message VibrateRequest {
+        repeated int32 v_time = 1;
+}
