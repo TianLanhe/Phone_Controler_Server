@@ -122,8 +122,9 @@ func handle(cmd string, conn net.Conn, ch chan int32) error {
 		return err
 	}
 
+	data = strings.TrimSpace(data)
 	log.Println("[handle]: read successed: ", data)
-	n, err := strconv.ParseInt(strings.TrimSpace(data), 10, 32)
+	n, err := strconv.ParseInt(data, 10, 32)
 	if err != nil {
 		log.Println("[handle]: convert error: ", err)
 		return err
@@ -166,7 +167,7 @@ func handleVibrate(num int32, conn net.Conn, ch chan int32) error {
 		return err
 	}
 
-	log.Println("[handleVibrate]: write successed:%v", data)
+	log.Println("[handleVibrate]: write successed: ", data)
 
 	reader := bufio.NewReader(conn)
 	ret, err := reader.ReadString('\n')
@@ -175,8 +176,9 @@ func handleVibrate(num int32, conn net.Conn, ch chan int32) error {
 		return err
 	}
 
-	log.Println("[handleVibrate]: read successed: ", result)
-	n, err := strconv.ParseInt(strings.TrimSpace(ret), 10, 32)
+	ret = strings.TrimSpace(ret)
+	log.Println("[handleVibrate]: read successed: ", ret)
+	n, err := strconv.ParseInt(ret, 10, 32)
 	if err != nil {
 		log.Println("[handleVibrate]: convert error: ", err)
 		return err
